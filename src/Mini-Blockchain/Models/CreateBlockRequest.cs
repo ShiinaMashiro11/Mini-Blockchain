@@ -2,6 +2,5 @@
 {
     public class CreateBlockRequest
     {
-        public string Data { get; set; }
     }
 }
