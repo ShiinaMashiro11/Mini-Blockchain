@@ -6,5 +6,4 @@ namespace Mini_Blockchain.Data
     {
         public static List<Block> Chain = new List<Block>();
     }
-
 }
