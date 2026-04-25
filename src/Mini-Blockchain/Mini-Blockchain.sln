@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.12.35527.113 d17.12
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data Access Layer", "Data Access Layer.csproj", "{022F667D-5D54-47B6-AD27-FE9C6624C01F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mini-Blockchain", "Mini-Blockchain.csproj", "{AFD16F05-7028-4E14-AEC2-0F4EE57B2DAF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{022F667D-5D54-47B6-AD27-FE9C6624C01F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{022F667D-5D54-47B6-AD27-FE9C6624C01F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{022F667D-5D54-47B6-AD27-FE9C6624C01F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{022F667D-5D54-47B6-AD27-FE9C6624C01F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFD16F05-7028-4E14-AEC2-0F4EE57B2DAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFD16F05-7028-4E14-AEC2-0F4EE57B2DAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFD16F05-7028-4E14-AEC2-0F4EE57B2DAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFD16F05-7028-4E14-AEC2-0F4EE57B2DAF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

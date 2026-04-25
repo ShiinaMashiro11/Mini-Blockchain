@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Data_Access_Layer.Controllers
+namespace Mini_Blockchain.Controllers
 {
     [ApiController]
     [Route("[controller]")]

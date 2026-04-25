@@ -1,4 +1,4 @@
-namespace Data_Access_Layer
+namespace Mini_Blockchain
 {
     public class WeatherForecast
     {
