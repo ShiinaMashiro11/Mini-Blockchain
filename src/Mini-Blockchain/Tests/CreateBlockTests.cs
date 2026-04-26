@@ -1,6 +1,20 @@
-﻿namespace Mini_Blockchain.Tests
+﻿using Xunit;
+using Moq;
+using Microsoft.Extensions.Logging;
+
+public class CreateBlockTests
 {
-    public class CreateBlockTests
+    [Fact]
+    public async Task Should_Create_Block()
     {
+        var repo = new Mock<IBlockRepository>();
+
+        var handler = new CreateBlockHandler(repo.Object, Mock.Of<ILogger<CreateBlockHandler>>());
+
+        var result = await handler.Handle(
+            new CreateBlockCommand { Data = "test" },
+            CancellationToken.None);
+
+        Assert.NotNull(result);
     }
 }
