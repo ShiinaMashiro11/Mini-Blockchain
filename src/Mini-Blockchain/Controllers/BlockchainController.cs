@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mini_Blockchain.Models;
 using Mini_Blockchain.Services;
 using Mini_Blockchain.Data;
@@ -9,6 +10,13 @@ namespace Mini_Blockchain.Controllers
     [Route("api/blockchain")]
     public class BlockchainController : ControllerBase
     {
+        private readonly ApplicationDbContext _db;
+
+        public BlockchainController(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
         [HttpPost("hash")]
         public IActionResult GenerateHash([FromBody] string text)
         {
@@ -16,46 +24,48 @@ namespace Mini_Blockchain.Controllers
         }
 
         [HttpPost("block")]
-        public IActionResult AddBlock([FromBody] CreateBlockRequest request)
+        public async Task<IActionResult> AddBlock([FromBody] CreateBlockRequest request)
         {
             var dataHash = HashHelper.ComputeHash(request.Data);
 
-            var previousHash = BlockchainDb.Chain.Count == 0
-                ? "GENESIS"
-                : BlockchainDb.Chain.Last().DataHash;
+            var lastBlock = await _db.Blocks
+                .OrderByDescending(b => b.Id)
+                .FirstOrDefaultAsync();
+
+            var previousHash = lastBlock == null ? "GENESIS" : lastBlock.DataHash;
 
             var block = new Block
             {
-                Id = BlockchainDb.Chain.Count + 1,
                 DataHash = dataHash,
                 PreviousHash = previousHash,
                 Timestamp = DateTime.UtcNow
             };
 
-            BlockchainDb.Chain.Add(block);
+            _db.Blocks.Add(block);
+            await _db.SaveChangesAsync();
 
             return Ok(block);
         }
 
-        [HttpGet("validate")]
-        public IActionResult Validate()
+        [HttpGet]
+        public async Task<IActionResult> GetChain()
         {
-            for (int i = 1; i < BlockchainDb.Chain.Count; i++)
-            {
-                var current = BlockchainDb.Chain[i];
-                var previous = BlockchainDb.Chain[i - 1];
+            var chain = await _db.Blocks.OrderBy(b => b.Id).ToListAsync();
+            return Ok(chain);
+        }
 
-                if (current.PreviousHash != previous.DataHash)
+        [HttpGet("validate")]
+        public async Task<IActionResult> Validate()
+        {
+            var chain = await _db.Blocks.OrderBy(b => b.Id).ToListAsync();
+
+            for (int i = 1; i < chain.Count; i++)
+            {
+                if (chain[i].PreviousHash != chain[i - 1].DataHash)
                     return BadRequest("Chain is broken!");
             }
 
             return Ok("Chain is valid");
-        }
-
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            return Ok(BlockchainDb.Chain);
         }
     }
 }
