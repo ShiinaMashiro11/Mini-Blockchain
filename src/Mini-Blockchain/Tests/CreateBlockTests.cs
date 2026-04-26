@@ -1,6 +1,8 @@
 ﻿using Xunit;
 using Moq;
 using Microsoft.Extensions.Logging;
+using Mini_Blockchain.Application.Commands.CreateBlock;
+using Mini_Blockchain.Application.Interfaces;
 
 public class CreateBlockTests
 {

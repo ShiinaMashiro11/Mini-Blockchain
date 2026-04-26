@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Mini_Blockchain.Application.Commands.CreateBlock;
 using Mini_Blockchain.Application.Queries.GetBlockchain;
 using Mini_Blockchain.Application.Queries.ValidateChain;
+namespace Mini_Blockchain.API.Controllers;
 
 [ApiController]
 [Route("api/blockchain")]

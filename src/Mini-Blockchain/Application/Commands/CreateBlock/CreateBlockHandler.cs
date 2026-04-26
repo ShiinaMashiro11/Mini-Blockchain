@@ -1,6 +1,11 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
 using Mini_Blockchain.Domain.Entities;
+using Mini_Blockchain.Application.DTOs;
+using Mini_Blockchain.Application.Interfaces;
+
+
+namespace Mini_Blockchain.Application.Commands.CreateBlock;
 
 public class CreateBlockHandler : IRequestHandler<CreateBlockCommand, BlockDto>
 {

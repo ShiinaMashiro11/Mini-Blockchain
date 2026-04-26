@@ -1,4 +1,5 @@
 ﻿using Mini_Blockchain.Domain.Entities;
+namespace Mini_Blockchain.Application.Interfaces;
 
 public interface IBlockRepository
 {

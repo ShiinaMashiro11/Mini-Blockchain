@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 
+namespace Mini_Blockchain.Application.Commands.CreateBlock;
+
 public class CreateBlockValidator : AbstractValidator<CreateBlockCommand>
 {
     public CreateBlockValidator()

@@ -1,4 +1,7 @@
 ﻿using Mini_Blockchain.Domain.Entities;
+using Mini_Blockchain.Application.Interfaces;
+namespace Mini_Blockchain.Infrastructure.Repositories;
+
 
 public class FakeBlockRepository : IBlockRepository
 {

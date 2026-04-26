@@ -1,4 +1,8 @@
 ﻿using MediatR;
+using Mini_Blockchain.Application.DTOs;
+using Mini_Blockchain.Application.Interfaces;
+using Mini_Blockchain.Domain.Entities;
+namespace Mini_Blockchain.Application.Queries.ValidateChain;
 
 public class ValidateChainHandler : IRequestHandler<ValidateChainQuery, bool>
 {

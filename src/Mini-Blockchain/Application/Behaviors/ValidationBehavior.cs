@@ -1,8 +1,10 @@
 ﻿using FluentValidation;
 using MediatR;
-using System.ComponentModel.DataAnnotations;
 
-public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+namespace Mini_Blockchain.Application.Behaviors;
+
+public class ValidationBehavior<TRequest, TResponse>
+    where TRequest : notnull
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -22,7 +24,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
             .ToList();
 
         if (failures.Any())
-            throw new ValidationException(failures);
+            throw new FluentValidation.ValidationException(failures);
 
         return await next();
     }

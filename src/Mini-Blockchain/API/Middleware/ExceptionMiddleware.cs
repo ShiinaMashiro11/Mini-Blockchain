@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+namespace Mini_Blockchain.API.Middleware;
 
 public class ExceptionMiddleware
 {
