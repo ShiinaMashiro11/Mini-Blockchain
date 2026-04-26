@@ -1,6 +1,11 @@
-﻿namespace Mini_Blockchain.Application.Commands.CreateBlock
+﻿using FluentValidation;
+
+public class CreateBlockValidator : AbstractValidator<CreateBlockCommand>
 {
-    public class CreateBlockValidator
+    public CreateBlockValidator()
     {
+        RuleFor(x => x.Data)
+            .NotEmpty()
+            .MaximumLength(500);
     }
 }

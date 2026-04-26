@@ -1,6 +1,6 @@
-﻿namespace Mini_Blockchain.Application.Commands.CreateBlock
+﻿using MediatR;
+
+public class CreateBlockCommand : IRequest<BlockDto>
 {
-    public class CreateBlockCommand
-    {
-    }
+    public string Data { get; set; }
 }

@@ -1,6 +1,3 @@
-﻿namespace Mini_Blockchain.Application.Queries.ValidateChain
-{
-    public class ValidateChainQuery
-    {
-    }
-}
+﻿using MediatR;
+
+public class ValidateChainQuery : IRequest<bool> { }
