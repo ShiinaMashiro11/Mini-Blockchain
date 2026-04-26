@@ -1,10 +1,10 @@
-﻿using FluentValidation;
-using MediatR;
+﻿using MediatR;
+using FluentValidation;
 
 namespace Mini_Blockchain.Application.Behaviors;
 
-public class ValidationBehavior<TRequest, TResponse>
-    where TRequest : notnull
+public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+    where TRequest : notnull 
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -13,18 +13,23 @@ public class ValidationBehavior<TRequest, TResponse>
         _validators = validators;
     }
 
-    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken ct)
+    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
     {
-        var context = new ValidationContext<TRequest>(request);
+        if (_validators.Any())
+        {
+            var context = new ValidationContext<TRequest>(request);
+            
+            var validationResults = await Task.WhenAll(
+                _validators.Select(v => v.ValidateAsync(context, cancellationToken)));
+            
+            var failures = validationResults
+                .SelectMany(r => r.Errors)
+                .Where(f => f != null)
+                .ToList();
 
-        var failures = _validators
-            .Select(v => v.Validate(context))
-            .SelectMany(x => x.Errors)
-            .Where(x => x != null)
-            .ToList();
-
-        if (failures.Any())
-            throw new FluentValidation.ValidationException(failures);
+            if (failures.Count != 0)
+                throw new ValidationException(failures);
+        }
 
         return await next();
     }
